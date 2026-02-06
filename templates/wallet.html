@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="panel">
+  <div class="panel-header">
+    <h2>Wallet Overview</h2>
+    <button class="ghost">Deposit</button>
+  </div>
+  <div class="wallet-summary">
+    <div>
+      <span>Total Balance</span>
+      <strong>$24,580.43</strong>
+    </div>
+    <div>
+      <span>Available</span>
+      <strong>$18,930.12</strong>
+    </div>
+    <div>
+      <span>In Orders</span>
+      <strong>$5,650.31</strong>
+    </div>
+  </div>
+  <table class="markets">
+    <thead>
+      <tr>
+        <th>Asset</th>
+        <th>Available</th>
+        <th>In Orders</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for balance in balances %}
+      <tr>
+        <td class="pair">{{ balance.asset }}</td>
+        <td>{{ balance.available }}</td>
+        <td>{{ balance.in_order }}</td>
+        <td><button class="ghost">Transfer</button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

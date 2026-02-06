@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="trade-layout">
+  <div class="panel">
+    <div class="panel-header">
+      <h2>BTC/USDT</h2>
+      <span class="badge">Spot</span>
+    </div>
+    <div class="trade-grid">
+      <div>
+        <h4>Order Book</h4>
+        <div class="order-book">
+          <div>
+            <h5>Asks</h5>
+            {% for level in order_book.asks %}
+            <div class="row ask">
+              <span>{{ level.price }}</span>
+              <span>{{ level.amount }}</span>
+            </div>
+            {% endfor %}
+          </div>
+          <div>
+            <h5>Bids</h5>
+            {% for level in order_book.bids %}
+            <div class="row bid">
+              <span>{{ level.price }}</span>
+              <span>{{ level.amount }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Place Order</h4>
+        <form class="order-form">
+          <label>Side</label>
+          <div class="pill-group">
+            <button type="button" class="pill active">Buy</button>
+            <button type="button" class="pill">Sell</button>
+          </div>
+          <label>Price</label>
+          <input type="text" value="65350.00" />
+          <label>Amount</label>
+          <input type="text" value="0.15" />
+          <button class="primary full">Submit Order</button>
+        </form>
+      </div>
+      <div>
+        <h4>Recent Trades</h4>
+        <div class="trades">
+          {% for trade in recent_trades %}
+          <div class="row">
+            <span class="{% if trade.side == 'buy' %}up{% else %}down{% endif %}">
+              {{ trade.price }}
+            </span>
+            <span>{{ trade.amount }}</span>
+            <span class="muted">{{ trade.time }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Top Markets</h3>
+      <button class="ghost">Refresh</button>
+    </div>
+    <div class="market-list">
+      {% for market in markets %}
+      <div class="market-item">
+        <div>
+          <strong>{{ market.symbol }}</strong>
+          <span class="muted">Vol {{ market.volume_24h }}</span>
+        </div>
+        <div class="right">
+          <strong>${{ market.last_price }}</strong>
+          <span class="{% if market.change_pct < 0 %}down{% else %}up{% endif %}">
+            {{ market.change_pct }}%
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

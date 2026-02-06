@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CryptoX Exchange</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark">CX</span>
+        <div>
+          <h1>CryptoX</h1>
+          <p>Demo exchange experience inspired by Binance</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#markets">Markets</a>
+        <a href="#trade">Trade</a>
+        <a href="#learn">Learn</a>
+      </nav>
+      <div class="actions">
+        <button class="ghost">Log in</button>
+        <button class="primary">Sign up</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h2>Buy &amp; sell crypto in minutes</h2>
+          <p>
+            CryptoX is a local demo you can run on your machine. Explore markets,
+            check an order book, and preview a trading dashboard.
+          </p>
+          <div class="hero-actions">
+            <button class="primary">Start trading</button>
+            <button class="ghost">View demo</button>
+          </div>
+          <div class="stats">
+            <div>
+              <h3>$72B+</h3>
+              <span>24h volume</span>
+            </div>
+            <div>
+              <h3>350+</h3>
+              <span>Trading pairs</span>
+            </div>
+            <div>
+              <h3>120</h3>
+              <span>Countries</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>BTC/USDT</h3>
+          <div class="price">$64,250.12</div>
+          <div class="change positive">+2.14%</div>
+          <div class="sparkline" id="sparkline"></div>
+          <div class="mini-stats">
+            <div>
+              <span>High</span>
+              <strong>$64,980</strong>
+            </div>
+            <div>
+              <span>Low</span>
+              <strong>$62,140</strong>
+            </div>
+            <div>
+              <span>24h Vol</span>
+              <strong>12.8K BTC</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="markets">
+        <div class="panel-header">
+          <h2>Top markets</h2>
+          <button class="ghost">View all markets</button>
+        </div>
+        <div class="market-table">
+          <div class="table-row header">
+            <span>Pair</span>
+            <span>Last price</span>
+            <span>24h change</span>
+            <span>24h volume</span>
+            <span></span>
+          </div>
+          {% for market in markets %}
+          <div class="table-row">
+            <div class="pair">
+              <strong>{{ market.base }}</strong>
+              <span>/{{ market.quote }}</span>
+            </div>
+            <span>${{ market.price }}</span>
+            <span class="change {% if market.change >= 0 %}positive{% else %}negative{% endif %}">
+              {{ market.change }}%
+            </span>
+            <span>{{ market.volume }} {{ market.base }}</span>
+            <button class="primary small">Trade</button>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="grid" id="trade">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Order book</h2>
+            <span class="chip">BTCUSDT</span>
+          </div>
+          <div class="orderbook">
+            <div>
+              <h4>Asks</h4>
+              <ul>
+                <li><span>64,310.7</span><span>0.76 BTC</span></li>
+                <li><span>64,288.4</span><span>1.12 BTC</span></li>
+                <li><span>64,260.8</span><span>0.54 BTC</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Bids</h4>
+              <ul>
+                <li><span>64,240.2</span><span>0.82 BTC</span></li>
+                <li><span>64,212.9</span><span>1.43 BTC</span></li>
+                <li><span>64,190.1</span><span>2.10 BTC</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Quick trade</h2>
+            <span class="chip">Spot</span>
+          </div>
+          <form class="trade-form">
+            <label>
+              Amount
+              <input type="number" placeholder="0.00" />
+            </label>
+            <label>
+              Price
+              <input type="number" placeholder="64,250" />
+            </label>
+            <label>
+              Total
+              <input type="number" placeholder="0.00" />
+            </label>
+            <button class="primary">Place order</button>
+          </form>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h2>News &amp; learn</h2>
+          </div>
+          <div class="news">
+            <article>
+              <h3>CryptoX Earn</h3>
+              <p>Build passive income strategies with flexible and locked rewards.</p>
+            </article>
+            <article>
+              <h3>New listing alert</h3>
+              <p>Explore upcoming tokens with early access insights.</p>
+            </article>
+            <article>
+              <h3>Institutional desk</h3>
+              <p>Advanced liquidity programs for high-volume traders.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="learn">
+        <div class="panel-header">
+          <h2>Why CryptoX</h2>
+        </div>
+        <div class="features">
+          <div>
+            <h3>Secure by design</h3>
+            <p>Multi-layer security, 24/7 monitoring, and cold storage practices.</p>
+          </div>
+          <div>
+            <h3>Instant access</h3>
+            <p>On-ramp with multiple payment methods and fast settlements.</p>
+          </div>
+          <div>
+            <h3>Pro tools</h3>
+            <p>Advanced charting, alerts, and analytics for active traders.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>CryptoX demo • Last updated {{ last_updated|date:"M d, Y H:i" }} UTC</p>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>
